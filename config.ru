@@ -1,0 +1,3 @@
+require './tmpfollow'
+
+run TmpFollow

@@ -1,0 +1,85 @@
+@import 'compass/reset';
+@import 'compass/css3';
+
+$twitter: #4099ff;
+
+body{
+  background:#ddd;
+  font:12px/120% 'Helvetica Neue', sans-serif;
+  text-align:center;
+  padding:40px 0 0;
+
+  @include text-shadow(0 1px 0 #fff);
+
+  h1{
+    text-indent:-9001px;
+    background:url('logo.png');
+    width:130px;
+    height:26px;
+    margin:0 auto 4px;
+  }
+
+  p{margin-bottom:20px;
+    &.flash{
+      &.alert{color:darkred;}
+      &.notice{color:darkgreen;}
+    }
+  }
+
+  a{color:#000;}
+
+  form{
+    font-size:14px;
+    margin-bottom:20px;
+
+    input{
+      font:14px/120% 'Helvetica Neue', sans-serif;
+      padding:0px;
+      border:none;
+      border-bottom:1px solid #666;
+      background:#ddd;
+      width:100px;
+
+      &:focus{outline:none;}
+
+      &#days{
+        width:20px;
+        text-align:center;
+      }
+
+      &#at{
+        width:16px;
+        margin-right:-8px;
+      }
+
+      &[type=submit]{
+        width:auto;
+        border:none;
+        background:#488fe0;
+        padding:2px 6px 3px;
+        color:#fff;
+        border:1px solid darken($twitter, 15%);
+
+        @include text-shadow(0 1px 0 darken($twitter, 20%));
+        @include box-shadow(0 1px 0 darken($twitter, 30%));
+        @include background(linear-gradient(darken($twitter, 5%), $twitter));
+        @include border-radius(4px);
+
+        &:hover{@include background(linear-gradient($twitter, lighten($twitter, 5%)));}
+        &:hover{@include background(linear-gradient(lighten($twitter, 5%), $twitter));}
+      }
+    }
+  }
+
+  footer{
+    background:#000 url('background.png');
+    color:#eee;
+    position:absolute;
+    bottom:0;
+    width:100%;
+    padding:40px 0;
+
+    @include box-shadow(inset 0px 5px 8px -2px #000);
+    @include text-shadow(0 1px 0 #000);
+  }
+}

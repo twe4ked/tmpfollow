@@ -1,0 +1,11 @@
+- if session[:oauth_token] == nil && session[:oauth_token_secret] == nil
+  %a{:href => '/twitter'} Authenticate with Twitter
+- else
+  %form{action: '/follow', method: 'post'}
+    Follow
+    %input{disabled: true, value: '@', id: 'at'}
+    %input{name: 'user', id: 'user', autocomplete: 'off', value: params[:user]}
+    for
+    %input{name: 'days', id: 'days', autocomplete: 'off', value: params[:days]}
+    days
+    %input{type: 'submit', value: 'tmp/follow'}
