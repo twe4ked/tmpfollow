@@ -9,3 +9,8 @@
     %input{name: 'days', id: 'days', autocomplete: 'off', value: params[:days]}
     days
     %input{type: 'submit', value: 'tmp/follow'}
+
+  %ul
+    - Unfollow.all(oauth_token: session[:oauth_token], oauth_token_secret: session[:oauth_token_secret]).each do |unfollow|
+      %li
+        @#{unfollow.user} will be unfollowed on #{unfollow.date.strftime("%A, %b #{unfollow.date.day.ordinalize}")}
