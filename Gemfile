@@ -10,6 +10,7 @@ gem 'sass'
 gem 'thin'
 gem 'haml'
 gem 'rake'
+gem 'pry'
 
 # DataMapper
 gem 'dm-core'
@@ -17,7 +18,3 @@ gem 'dm-timestamps'
 gem 'dm-migrations'
 gem 'dm-validations'
 gem 'dm-postgres-adapter'
-
-group :development, :test do
-  gem 'pry'
-end

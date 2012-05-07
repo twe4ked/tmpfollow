@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+# heroku run console pry
+require 'pry'
+require './tmpfollow'
+pry
