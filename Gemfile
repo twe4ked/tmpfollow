@@ -20,5 +20,6 @@ gem 'dm-validations'
 gem 'dm-postgres-adapter'
 
 group :test do
+  gem 'simplecov'
   gem 'rspec'
 end

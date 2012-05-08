@@ -65,6 +65,10 @@ GEM
     rspec-mocks (2.10.0)
     sass (3.1.16)
     simple_oauth (0.1.7)
+    simplecov (0.6.1)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.5.3)
+    simplecov-html (0.5.3)
     sinatra (1.3.2)
       rack (~> 1.3, >= 1.3.6)
       rack-protection (~> 1.2)
@@ -107,6 +111,7 @@ DEPENDENCIES
   rake
   rspec
   sass
+  simplecov
   sinatra
   sinatra-reloader
   thin

@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start { add_filter '/spec/' }
+
 ENV['RACK_ENV'] = 'test'
 
 require 'bundler'
