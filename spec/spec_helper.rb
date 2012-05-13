@@ -9,11 +9,6 @@ Bundler.require(:test)
 require 'rack/test'
 require './tmpfollow'
 
-Sinatra::Base.set :environment, :test
-Sinatra::Base.set :run, false
-Sinatra::Base.set :raise_errors, true
-Sinatra::Base.set :logging, false
-Sinatra::Base.set :session, false
 
 def app
   TmpFollow
