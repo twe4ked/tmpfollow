@@ -1,5 +1,5 @@
 - if session[:oauth_token] == nil && session[:oauth_token_secret] == nil
-  %a{:href => '/twitter'} Authenticate with Twitter
+  %a{:href => '/auth/twitter'} Authenticate with Twitter
 - else
   %form{action: '/follow', method: 'post'}
     Follow

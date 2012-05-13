@@ -31,6 +31,10 @@ class TmpFollow < Sinatra::Base
     set :haml, {format: :html5}
   end
 
+  use OmniAuth::Builder do
+    provider :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET']
+  end
+
   helpers do
     def flashes
       [:notice, :alert].map do |type|
@@ -81,34 +85,19 @@ class TmpFollow < Sinatra::Base
     redirect to '/'
   end
 
-  # redirects the user to Twitter for authentication
-  get '/twitter' do
-    callback_url = "#{base_url}/twitter/callback"
-    request_token = oauth_consumer.get_request_token(:oauth_callback => callback_url)
-    session[:request_token] = request_token.token
-    session[:request_token_secret] = request_token.secret
-    redirect request_token.authorize_url
-  end
-
-  # used by Twitter as the callback URL after the user has authenticated
-  get '/twitter/callback' do
-    request_token = OAuth::RequestToken.new(oauth_consumer, session[:request_token], session[:request_token_secret])
-    begin
-      @oauth_tokens = request_token.get_access_token(
-        {},
-        :oauth_token => params[:oauth_token],
-        :oauth_verifier => params[:oauth_verifier]
-      )
-    rescue OAuth::Unauthorized => exception
-      flash[:alert] = 'Authenticating with Twitter failed.'
-      redirect to '/'
-      # exception.message
-    end
+  get '/auth/:provider/callback' do
+    auth_hash = env['omniauth.auth'] # => OmniAuth::AuthHash
 
     # store oauth_token and oauth_token_secret in the session
-    session[:oauth_token]        = @oauth_tokens.token
-    session[:oauth_token_secret] = @oauth_tokens.secret
+    session[:oauth_token]        = auth_hash[:credentials][:token]
+    session[:oauth_token_secret] = auth_hash[:credentials][:secret]
 
+    flash[:notice] = 'Authenticated successfully.'
+    redirect to '/'
+  end
+
+  get '/auth/failure' do
+    flash[:alert] = 'Authentication failed.'
     redirect to '/'
   end
 
@@ -125,15 +114,6 @@ class TmpFollow < Sinatra::Base
   end
 
   private
-
-  def base_url
-    port = (request.port == 80) ? "" : ":#{request.port.to_s}"
-    "http://#{request.host}#{port}"
-  end
-
-  def oauth_consumer
-    OAuth::Consumer.new(ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET'], :site => 'https://twitter.com')
-  end
 
   def is_numeric?(str)
     !!str.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/)
