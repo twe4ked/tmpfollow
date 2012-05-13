@@ -11,13 +11,8 @@ describe TmpFollow do
     context 'with valid credentials' do
       before do
         OmniAuth.config.mock_auth[:twitter] = {
-          info: {
-            nickname: 'nedstark'
-          },
-          credentials: {
-            token: '1234',
-            secret: '5678'
-          }
+          info: { nickname: 'nedstark' },
+          credentials: { token: '1234', secret: '5678' }
         }
 
         visit '/'
