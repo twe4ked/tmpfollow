@@ -22,5 +22,6 @@ gem 'dm-postgres-adapter'
 
 group :test do
   gem 'simplecov'
+  gem 'capybara', :require => 'capybara/rspec'
   gem 'rspec'
 end
