@@ -8,23 +8,38 @@ describe TmpFollow do
       Capybara.app = TmpFollow
     end
 
-    it 'signs in with twitter', :type => :request do
-      visit '/'
-      click_link 'Authenticate with Twitter'
+    context 'with valid credentials' do
+      before do
+        OmniAuth.config.mock_auth[:twitter] = {
+          credentials: {
+            token: '1234',
+            secret: '5678'
+          }
+        }
+      end
 
-      page.should have_content 'Authenticated successfully.'
-      page.should_not have_content 'Authenticate with Twitter'
+      it 'signs in with twitter' do
+        visit '/'
+        click_link 'Authenticate with Twitter'
+
+        page.should have_content 'Authenticated successfully.'
+        page.should_not have_content 'Authenticate with Twitter'
+      end
     end
 
-    it 'returns an error from twitter' do
-      OmniAuth.config.mock_auth[:twitter] = :invalid_login
+    context 'with invalid credentials' do
+      before do
+        OmniAuth.config.mock_auth[:twitter] = :invalid_credentials
+      end
 
-      visit '/'
-      click_link 'Authenticate with Twitter'
+      it 'returns an error from twitter' do
+        visit '/'
+        click_link 'Authenticate with Twitter'
 
-      page.should have_content 'Authentication failed.'
-      page.should have_content 'Authenticate with Twitter'
-      page.should_not have_content 'Authenticated successfully.'
+        page.should have_content 'Authentication failed.'
+        page.should have_content 'Authenticate with Twitter'
+        page.should_not have_content 'Authenticated successfully.'
+      end
     end
   end
 end

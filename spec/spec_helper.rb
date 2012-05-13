@@ -11,12 +11,6 @@ require './tmpfollow'
 
 OmniAuth.config.test_mode = true
 OmniAuth.config.logger = Logger.new('/dev/null')
-OmniAuth.config.mock_auth[:twitter] = {
-  credentials: {
-    token: '1234',
-    secret: '5678'
-  }
-}
 
 def app
   TmpFollow
