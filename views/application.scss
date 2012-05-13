@@ -78,11 +78,11 @@ body{
 
         @include text-shadow(0 1px 0 darken($twitter, 20%));
         @include box-shadow(0 1px 0 darken($twitter, 30%));
-        @include background(linear-gradient(darken($twitter, 5%), $twitter));
+        @include background(linear-gradient($twitter, darken($twitter, 10%)));
         @include border-radius(4px);
 
-        &:hover{@include background(linear-gradient($twitter, lighten($twitter, 5%)));}
-        &:hover{@include background(linear-gradient(lighten($twitter, 5%), $twitter));}
+        &:hover{@include background(linear-gradient(lighten($twitter, 2%), darken($twitter, 4%)));}
+        &:active{@include background(linear-gradient(darken($twitter, 4%), lighten($twitter, 2%)));}
       }
     }
   }
