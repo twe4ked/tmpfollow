@@ -24,6 +24,17 @@ body{
       &.alert{color:darkred;}
       &.notice{color:darkgreen;}
     }
+    &.account{
+      font-size:12px;
+      color:#666;
+      display:inline-block;
+      border:1px dashed #BBB;
+      padding:4px 8px;
+
+      @include border-radius(3px);
+
+      a{color:#666;}
+    }
   }
 
   a{color:#000;}

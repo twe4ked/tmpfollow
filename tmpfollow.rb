@@ -96,6 +96,9 @@ class TmpFollow < Sinatra::Base
     session[:oauth_token]        = auth_hash[:credentials][:token]
     session[:oauth_token_secret] = auth_hash[:credentials][:secret]
 
+    # store username
+    session[:username] = auth_hash[:info][:nickname]
+
     flash[:notice] = 'Authenticated successfully.'
     redirect to '/'
   end

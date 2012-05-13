@@ -11,19 +11,26 @@ describe TmpFollow do
     context 'with valid credentials' do
       before do
         OmniAuth.config.mock_auth[:twitter] = {
+          info: {
+            nickname: 'nedstark'
+          },
           credentials: {
             token: '1234',
             secret: '5678'
           }
         }
+
+        visit '/'
+        click_link 'Authenticate with Twitter'
       end
 
       it 'signs in with twitter' do
-        visit '/'
-        click_link 'Authenticate with Twitter'
-
         page.should have_content 'Authenticated successfully.'
         page.should_not have_content 'Authenticate with Twitter'
+      end
+
+      it 'shows the current username' do
+        page.should have_content '@nedstark'
       end
     end
 
