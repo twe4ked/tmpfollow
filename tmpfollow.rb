@@ -41,6 +41,10 @@ class TmpFollow < Sinatra::Base
         "<p class='flash #{type}'>#{flash[type]}</p>" if flash[type] != nil
       end.join("\n")
     end
+
+    def authenticated?
+      session[:oauth_token] != nil && session[:oauth_token_secret] != nil
+    end
   end
 
   get '/' do

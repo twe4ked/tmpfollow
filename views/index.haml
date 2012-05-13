@@ -1,6 +1,4 @@
-- if session[:oauth_token] == nil && session[:oauth_token_secret] == nil
-  %a{:href => '/auth/twitter'} Authenticate with Twitter
-- else
+- if authenticated?
   %form{action: '/follow', method: 'post'}
     Follow
     %input{disabled: true, value: '@', id: 'at'}
@@ -14,3 +12,5 @@
     - Unfollow.all(oauth_token: session[:oauth_token], oauth_token_secret: session[:oauth_token_secret]).each do |unfollow|
       %li
         @#{unfollow.user} will be unfollowed on #{unfollow.date.strftime("%A, %b #{unfollow.date.day.ordinalize}")}
+- else
+  %a{:href => '/auth/twitter'} Authenticate with Twitter
