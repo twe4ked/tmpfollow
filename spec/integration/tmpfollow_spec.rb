@@ -27,6 +27,12 @@ describe TmpFollow do
       it 'shows the current username' do
         page.should have_content '@nedstark'
       end
+
+      it 'allows signing out' do
+        click_link 'sign out'
+        page.should have_content 'Signed out successfully.'
+        page.should have_content 'Authenticate with Twitter'
+      end
     end
 
     context 'with invalid credentials' do

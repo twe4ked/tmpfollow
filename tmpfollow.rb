@@ -108,11 +108,11 @@ class TmpFollow < Sinatra::Base
     redirect to '/'
   end
 
-  get '/clear' do
+  get '/signout' do
     session[:oauth_token]        = nil
     session[:oauth_token_secret] = nil
 
-    flash[:alert] = 'Tokens cleared.'
+    flash[:alert] = 'Signed out successfully.'
     redirect to '/'
   end
 

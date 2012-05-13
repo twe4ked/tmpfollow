@@ -12,7 +12,7 @@
     = yield
 
     - if authenticated?
-      %p.account Authenticated as @#{session[:username]} (#{"<a href='/clear'>log out</a>"}).
+      %p.account Authenticated as @#{session[:username]} (#{"<a href='/signout'>sign out</a>"}).
 
     %footer
       Made by Odin Dutton
