@@ -2,6 +2,7 @@ require 'simplecov'
 SimpleCov.start { add_filter '/spec/' }
 
 ENV['RACK_ENV'] = 'test'
+$LOAD_PATH << './spec' # so we can `require 'spec_helper'`
 
 require 'bundler'
 Bundler.require(:test)
